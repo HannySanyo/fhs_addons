@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="auth_signup_attachments" inherit_id="auth_signup.signup" name="Allow for attachments fields">
+        <xpath expr="//form" position="attributes">
+            <attribute name="enctype">multipart/form-data</attribute>
+        </xpath>
+    </template>
+
+	<template id="auth_signup_extended" inherit_id="auth_signup.fields" name="Account Signup Phone Number">
+		<xpath expr="//div[@class='mb-3 field-confirm_password']" position="after">
+			<div class="mb-3 field-phone">
+				<label for="phone">Phone Number</label>
+				<input type="phone"  name="phone" t-att-value="phone" id="phone" class="form-control form-control-sm" required="required" placeholder="+13038657377" />
+			</div>
+		</xpath>
+        <xpath expr="//div[last()]" position="after">
+            <div class="form-group field-contractor_doc">
+                <label for="contractor_doc">If you are a contractor, please provide proof of contractor license:</label>
+                <input type="file" name="contractor_doc" id="contractor_doc" class="form-control form-control-sm"/>
+                <input type="hidden" name="contractor_doc_filename" t-att-value="'file_' + (name or 'default_name')" />
+            </div>
+            <div style="height:15px">
+            </div>
+            <div class="form-group field-fiscal_doc">
+                <label for="fiscal_pos_doc">If you are tax exempt, please proof of fical position:</label>
+                <input type="file" name="fiscal_pos_doc" id="fiscal_pos_doc" class="form-control form-control-sm"/>
+                <input type="hidden" name="fiscal_pos_doc_name" t-att-value="'file_' + (name or 'default_name')" />
+            </div>
+            <div style="height:15px">
+            </div>
+        </xpath>
+    </template>
+</odoo>
