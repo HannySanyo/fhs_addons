@@ -14,7 +14,7 @@
             </div>
             <div class="mb-3 field-company_address" style="display:none;">
                 <label for="contractor_doc">Company Address:</label>
-                <<hr style="margin: 5px 0;"/>
+                <hr style="margin: 5px 0;"/>
                 <input type="text" id="company_address_str1" name="company_address_st1" placeholder="Address Line 1"/>
                 <input type="text" id="company_address_str2" name="company_address_st1" placeholder="Address Line 2"/>
                 <input type="text" id="company_address_city" name="company_address_city" placeholder="City"/>
