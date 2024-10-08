@@ -1,4 +1,4 @@
-odoo.define('your_module.signup', function (require) {
+odoo.define('auth_signup_extended.fields', function (require) {
     "use strict";
 
     var publicWidget = require('web.public.widget');
