@@ -6,7 +6,7 @@ odoo.define('your_module.signup', function (require) {
     publicWidget.registry.SignupForm = publicWidget.Widget.extend({
         selector: '.o_signup_form',  // Adjust this selector to match your signup form
         events: {
-            'input .company_name': '_onCompanyNameInput',
+            'input #company_name': '_onCompanyNameInput',
         },
 
         _onCompanyNameInput: function (event) {
