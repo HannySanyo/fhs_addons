@@ -14,11 +14,13 @@
   "author": "FHS - G.S.S.",
   "depends": ['auth_signup'],
   "data": [
+      'data/res.country.state.csv',
       'views/acct_signup_extension_view.xml',
       # 'views/res_partner_view.xml',  # This file is used to create page 'tabs' with the attachments; not needed if not wanted
   ],
   "assets": {
       'web.assets_frontend': [
+          'static/src/js/dynamic_fields.js',
           'static/src/js/signup.js',
       ],
   },

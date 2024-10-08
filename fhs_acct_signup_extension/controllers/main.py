@@ -14,7 +14,17 @@ from odoo.exceptions import UserError
 from odoo.addons.web.controllers.home import SIGN_UP_REQUEST_PARAMS
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
     
-class AuthSignupHomeInherit(AuthSignupHome):
+class AuthSignupHomeInherit(AuthSignupHome, http.Controller):
+
+    @http.route('/get_countries', type='json', auth='public')
+    def get_countries(self):
+        countries = request.env['res.country'].search([])
+        return [{'id': country.id, 'name': country.name} for country in countries]
+
+    @http.route('/get_states', type='json', auth='public')
+    def get_states(self, country_id):
+        states = request.env['res.country.state'].search([('country_id', '=', country_id)])
+        return [{'id': state.id, 'name': state.name} for state in states]
 
     def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
