@@ -12,7 +12,7 @@ class ResUsers(models.Model):
 	company_name = fields.Char(string='Company Name')
 
 	company_address_str1 = fields.Char(string='Company Address Street1')
-	company_address_str2 = fields.Char(string='Company Address Street2')x
+	company_address_str2 = fields.Char(string='Company Address Street2')
 	company_address_city = fields.Char(string='Company Address City')
 	company_address_state = fields.Char(string='Company Address State')
 	company_address_cntry = fields.Char(string='Company Address Country')
