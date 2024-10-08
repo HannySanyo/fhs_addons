@@ -19,8 +19,8 @@
                 <input type="text" id="company_address_str2" name="company_address_st1" placeholder="Address Line 2"/>
                 <input type="text" id="company_address_city" name="company_address_city" placeholder="City"/>
                 <input type="text" id="company_address_state" name="company_address_state" placeholder="State"/>
-                <input type="text" id="company_address_cntry" name="company_address_cntry" placeholder="Country"/>
                 <input type="text" id="company_address_zip" name="company_address_zip" placeholder="Zip/Postal Code"/>
+                <input type="text" id="company_address_cntry" name="company_address_cntry" placeholder="Country"/>
             </div>
             <div class="mb-3 field-customer_address">
                 <label for="customer_address">Address<br/></label>
@@ -29,8 +29,8 @@
                 <input type="text" id="customer_address_str2" name="customer_address_st1" placeholder="Address Line 2"/>
                 <input type="text" id="customer_address_city" name="customer_address_city" placeholder="City"/>
                 <input type="text" id="customer_address_state" name="customer_address_state" placeholder="State"/>
-                <input type="text" id="customer_address_cntry" name="customer_address_cntry" placeholder="Country"/>
                 <input type="text" id="customer_address_zip" name="customer_address_zip" placeholder="Zip/Postal Code"/>
+                <input type="text" id="customer_address_cntry" name="customer_address_cntry" placeholder="Country"/>
             </div>
 
 		</xpath>

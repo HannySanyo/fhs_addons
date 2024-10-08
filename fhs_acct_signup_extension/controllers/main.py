@@ -51,11 +51,34 @@ class AuthSignupHomeInherit(AuthSignupHome):
         if values.get('company_name'):
             values.update({
                 'company_name': values.get('company_name'),
-                'company_address': values.get('company_address')
+                'company_address_str1': values.get('company_address_str1'),
+                'company_address_str2': values.get('company_address_str2'),
+                'company_address_city': values.get('company_address_city'),
+                'company_address_state': values.get('company_address_state'),
+                'company_address_zip': values.get('company_address_zip'),
+                'company_address_cntry': values.get('company_address_cntry'),
+                'street': values.get('company_address_str1'),
+                'street2': values.get('company_address_str2'),
+                'city': values.get('company_address_city'),
+                'state_id': values.get('company_address_state'),
+                'zip': values.get('company_address_zip'),
+                'country_id': values.get('company_address_cntry'),
             })
-
-        if values.get('customer_address'):
-            values.update({'customer_address': values.get('customer_address')})
+        else:
+            values.update({
+                'customer_address_str1': values.get('customer_address_str1'),
+                'customer_address_str2': values.get('customer_address_str2'),
+                'customer_address_city': values.get('customer_address_city'),
+                'customer_address_state': values.get('customer_address_state'),
+                'customer_address_zip': values.get('customer_address_zip'),
+                'customer_address_cntry': values.get('customer_address_cntry'),
+                'street': values.get('customer_address_str1'),
+                'street2': values.get('customer_address_str2'),
+                'city': values.get('customer_address_city'),
+                'state_id': values.get('customer_address_state'),
+                'zip': values.get('customer_address_zip'),
+                'country_id': values.get('customer_address_cntry'),
+            })
 
         if values.get('fiscal_pos_doc_name'):
             datas = base64.b64encode(values.get('fiscal_pos_doc').read())
