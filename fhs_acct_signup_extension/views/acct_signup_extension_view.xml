@@ -13,7 +13,7 @@
                 <input type="text" id="company_name" name="company_name" placeholder="(Optional)"/>
             </div>
             <div class="mb-3 field-company_address" style="display:none;">
-                <label for="contractor_doc">Company Address:</label>
+                <label for="contractor_doc">Company Address</label>
                 <hr style="margin: 5px 0;"/>
                 <input type="text" id="company_address_str1" name="company_address_st1" placeholder="Address Line 1"/>
                 <input type="text" id="company_address_str2" name="company_address_st1" placeholder="Address Line 2"/>
@@ -23,7 +23,7 @@
                 <input type="text" id="company_address_zip" name="company_address_zip" placeholder="Zip / Postal Code"/>
             </div>
             <div class="mb-3 field-customer_address">
-                <label for="customer_address">Address:<br/></label>
+                <label for="customer_address">Address<br/></label>
                 <hr style="margin: 5px 0;"/>
                 <input type="text" id="customer_address_str1" name="customer_address_st1" placeholder="Address Line 1"/>
                 <input type="text" id="customer_address_str2" name="customer_address_st1" placeholder="Address Line 2"/>

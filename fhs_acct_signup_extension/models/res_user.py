@@ -10,8 +10,19 @@ class ResUsers(models.Model):
 	_inherit = 'res.users'
 
 	company_name = fields.Char(string='Company Name')
-	company_address = fields.Text(string='Company Address')
-	customer_address = fields.Text(string='Customer Address')
+	company_address_str1 = fields.Char(string='Company Address Street1')
+	company_address_str2 = fields.Char(string='Company Address Street2')
+	company_address_city = fields.Char(string='Company Address City')
+	company_address_state = fields.Char(string='Company Address State')
+	company_address_cntry = fields.Char(string='Company Address Country')
+	company_address_zip = fields.Num(string='Company Zip')
+    
+	customer_address_str1 = fields.Char(string='Customer Street1')
+	customer_address_str2 = fields.Char(string='Customer Street2')
+	customer_address_city = fields.Char(string='Customer City')
+	customer_address_state = fields.Char(string='Customer State')
+	customer_address_cntry = fields.Char(string='Customer Country')
+	customer_address_zip = fields.Num(string='Customer Zip')
 
 	@api.model
 	def signup(self, values, token=None):
@@ -30,13 +41,33 @@ class ResUsers(models.Model):
 			if partner_user:
 				values['phone'] = values.get('phone')
 				values['company_name'] = values.get('company_name')
-				values['company_address'] = values.get('company_address')
-				values['customer_address'] = values.get('customer_address')
+				values['company_address_str1'] = values.get('company_address_str1')
+				values['company_address_str2'] = values.get('company_address_str2')
+				values['company_address_city'] = values.get('company_address_city')
+				values['company_address_state'] = values.get('company_address_state')
+				values['company_address_cntry'] = values.get('company_address_cntry')
+				values['company_address_zip'] = values.get('company_address_zip')
+				values['customer_address_str1'] = values.get('customer_address_str1')
+				values['customer_address_str2'] = values.get('customer_address_str2')
+				values['customer_address_city'] = values.get('customer_address_city')
+				values['customer_address_state'] = values.get('customer_address_state')
+				values['customer_address_cntry'] = values.get('customer_address_cntry')
+				values['customer_address_zip'] = values.get('customer_address_zip')
 
 		else:	
 			values['phone'] = values.get('phone')
 			values['company_name'] = values.get('company_name')
-			values['company_address'] = values.get('company_address')
-			values['customer_address'] = values.get('customer_address')
+			values['company_address_str1'] = values.get('company_address_str1')
+			values['company_address_str2'] = values.get('company_address_str2')
+			values['company_address_city'] = values.get('company_address_city')
+			values['company_address_state'] = values.get('company_address_state')
+			values['company_address_cntry'] = values.get('company_address_cntry')
+			values['company_address_zip'] = values.get('company_address_zip')
+			values['customer_address_str1'] = values.get('customer_address_str1')
+			values['customer_address_str2'] = values.get('customer_address_str2')
+			values['customer_address_city'] = values.get('customer_address_city')
+			values['customer_address_state'] = values.get('customer_address_state')
+			values['customer_address_cntry'] = values.get('customer_address_cntry')
+			values['customer_address_zip'] = values.get('customer_address_zip')
 		return super(ResUsers, self).signup(values, token)
 		
