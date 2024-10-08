@@ -1,12 +1,17 @@
 #################################################################################
 # File Name: res_user.py
 # Revision History:  Engineer    Date          Description
+#                    G. Sanyo    10/08/2024    Add compnay name and address fields
 #                    G. Sanyo    09/29/2024    Creation
 #################################################################################
 from odoo import api, fields, models
 
 class ResUsers(models.Model):
 	_inherit = 'res.users'
+
+	company_name = fields.Char(string='Company Name')
+	company_address = fields.Text(string='Company Address')
+	customer_address = fields.Text(string='Customer Address')
 
 	@api.model
 	def signup(self, values, token=None):
