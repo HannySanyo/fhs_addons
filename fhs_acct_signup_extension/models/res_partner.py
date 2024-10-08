@@ -1,6 +1,7 @@
 #################################################################################
 # File Name: res_partner.py
 # Revision History:  Engineer    Date          Description
+#                    G. Sanyo    10/08/2024    Add company name and address fields
 #                    G. Sanyo    10/03/2024    Add attachments for contractor doc
 #                                              and fiscal position doc
 #                    G. Sanyo    09/29/2024    Creation
@@ -10,6 +11,9 @@ from odoo import models, fields, api
 class ResPartnerInherit(models.Model):
     _inherit = 'res.partner'
 
+    company_name = fields.Char(string='Company Name')
+    company_address = fields.Text(string='Company Address')
+    customer_address = fields.Text(string='Customer Address')
     contractor_doc = fields.Binary(string='Contractor Doc', attachment=True)
     contractor_doc_filename = fields.Char(string='Contractor Doc Name')
     fiscal_pos_doc = fields.Binary(string='Fiscal Position Doc', attachment=True)
@@ -23,8 +27,8 @@ class ResPartnerInherit(models.Model):
         # Create an fiscal_pos_doc if the binary field has data
         if vals.get('fiscal_pos_doc'):
 
-            record.x_studio_fiscal_doc = vals.get('fiscal_pos_doc')
-            record.x_studio_fiscal_doc_filename = vals.get('fiscal_pos_doc_name')
+            # record.x_studio_fiscal_doc = vals.get('fiscal_pos_doc')
+            # record.x_studio_fiscal_doc_filename = vals.get('fiscal_pos_doc_name')
 
             self.env['ir.attachment'].create_attachment_record({
                 'name': vals.get('fiscal_pos_doc_name'),
@@ -37,8 +41,8 @@ class ResPartnerInherit(models.Model):
         # Create an attachment if the binary field has data
         if vals.get('contractor_doc'):
 
-            record.x_studio_contractor_doc = vals.get('contractor_doc')
-            record.x_studio_contractor_doc_filename = vals.get('contractor_doc_filename')
+            # record.x_studio_contractor_doc = vals.get('contractor_doc')
+            # record.x_studio_contractor_doc_filename = vals.get('contractor_doc_filename')
 
             self.env['ir.attachment'].create_attachment_record({
                 'name': vals.get('contractor_doc'),

@@ -29,8 +29,14 @@ class ResUsers(models.Model):
 			partner_user = partner.user_ids and partner.user_ids[0] or False
 			if partner_user:
 				values['phone'] = values.get('phone')
+				values['company_name'] = values.get('company_name')
+				values['company_address'] = values.get('company_address')
+				values['customer_address'] = values.get('customer_address')
 
 		else:	
 			values['phone'] = values.get('phone')
+			values['company_name'] = values.get('company_name')
+			values['company_address'] = values.get('company_address')
+			values['customer_address'] = values.get('customer_address')
 		return super(ResUsers, self).signup(values, token)
 		
