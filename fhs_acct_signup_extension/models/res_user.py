@@ -15,14 +15,14 @@ class ResUsers(models.Model):
 	company_address_city = fields.Char(string='Company Address City')
 	company_address_state = fields.Char(string='Company Address State')
 	company_address_cntry = fields.Char(string='Company Address Country')
-	company_address_zip = fields.Num(string='Company Zip')
+	company_address_zip = fields.Char(string='Company Zip')
     
 	customer_address_str1 = fields.Char(string='Customer Street1')
 	customer_address_str2 = fields.Char(string='Customer Street2')
 	customer_address_city = fields.Char(string='Customer City')
 	customer_address_state = fields.Char(string='Customer State')
 	customer_address_cntry = fields.Char(string='Customer Country')
-	customer_address_zip = fields.Num(string='Customer Zip')
+	customer_address_zip = fields.Char(string='Customer Zip')
 
 	@api.model
 	def signup(self, values, token=None):
