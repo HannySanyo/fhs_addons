@@ -8,12 +8,12 @@
 
 	<template id="auth_signup_extended" inherit_id="auth_signup.fields" name="Address field for Company / Customer">
 		<xpath expr="//div[@class='mb-3 field-name']" position="after">
-            <div class="mb-3 field-company">
+            <div class="mb-3 field-company_name">
                 <label for="company_name">Company Name</label>
                 <input type="text" id="company_name" name="company_name" placeholder="(Optional)"/>
             </div>
             <div class="mb-3 field-company_address" style="display:none;">
-                <label for="contractor_doc">Company Address:</label>
+                <label for="contractor_doc">Company Address:<br/></label>
                 <input type="text" id="company_address_str1" name="company_address_st1" placeholder="Address Line 1"/>
                 <input type="text" id="company_address_str2" name="company_address_st1" placeholder="Address Line 2"/>
                 <input type="text" id="company_address_city" name="company_address_city" placeholder="City"/>
@@ -22,7 +22,7 @@
                 <input type="text" id="company_address_zip" name="company_address_zip" placeholder="Zip / Postal Code"/>
             </div>
             <div class="mb-3 field-customer_address">
-                <label for="customer_address">Address</label>
+                <label for="customer_address">Address:<br/></label>
                 <input type="text" id="customer_address_str1" name="customer_address_st1" placeholder="Address Line 1"/>
                 <input type="text" id="customer_address_str2" name="customer_address_st1" placeholder="Address Line 2"/>
                 <input type="text" id="customer_address_city" name="customer_address_city" placeholder="City"/>

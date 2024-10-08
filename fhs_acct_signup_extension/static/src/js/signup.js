@@ -1,19 +1,25 @@
-//////////////////////////////////////////////////////////////////////////////////
-// File Name: signup.js
-// Revision History:  Engineer    Date          Description
-//                    G. Sanyo    10/08/2024    Add compnay name and address fields
-//                    G. Sanyo    09/29/2024    Creation
-//////////////////////////////////////////////////////////////////////////////////
+odoo.define('your_module.signup', function (require) {
+    "use strict";
 
-document.addEventListener('DOMContentLoaded', function () {
-    const companyNameInput = document.getElementById('company_name');
-    const companyAddressDiv = document.getElementById('company_address');
+    var publicWidget = require('web.public.widget');
 
-    companyNameInput.addEventListener('input', function () {
-        if (this.value) {
-            companyAddressDiv.style.display = 'block';
-        } else {
-            companyAddressDiv.style.display = 'none';
-        }
+    publicWidget.registry.SignupForm = publicWidget.Widget.extend({
+        selector: '.o_signup_form',  // Adjust this selector to match your signup form
+        events: {
+            'input .company_name': '_onCompanyNameInput',
+        },
+
+        _onCompanyNameInput: function (event) {
+            var companyName = $(event.currentTarget).val();
+            if (companyName) {
+                // Show company address fields
+                this.$('.field-company_address').show();
+                this.$('.field-customer_address').show();
+            } else {
+                // Hide company address fields
+                this.$('.field-company_address').hide();
+                this.$('.field-customer_address').hide();
+            }
+        },
     });
 });
