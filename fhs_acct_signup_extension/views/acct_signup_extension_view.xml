@@ -14,12 +14,13 @@
             </div>
             <div class="mb-3 field-company_address" style="display:none;">
                 <label for="company_address">Company Address</label>
-                <input type="text" id="company_address" name="company_address" placeholder="Enter your company address">
+                <input type="text" id="company_address" name="company_address" placeholder="Enter your company address"/>
             </div>
             <div class="mb-3 field-customer_address">
                 <label for="customer_address">Address</label>
-                <input type="text" id="customer_address" name="customer_address" placeholder="Enter your address">
+                <input type="text" id="customer_address" name="customer_address" placeholder="Enter your address"/>
             </div>
+
 		</xpath>
 		<xpath expr="//div[@class='mb-3 field-confirm_password']" position="after">
 			<div class="mb-3 field-phone">
@@ -36,7 +37,7 @@
             <div style="height:15px">
             </div>
             <div class="form-group field-fiscal_doc">
-                <label for="fiscal_pos_doc">If you are tax exempt, please proof of fical position:</label>
+                <label for="fiscal_pos_doc">If you are tax exempt, please proof of fiscal position:</label>
                 <input type="file" name="fiscal_pos_doc" id="fiscal_pos_doc" class="form-control form-control-sm"/>
                 <input type="hidden" name="fiscal_pos_doc_name" t-att-value="'file_' + (name or 'default_name')" />
             </div>
