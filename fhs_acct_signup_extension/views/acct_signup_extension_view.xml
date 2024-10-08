@@ -6,55 +6,64 @@
         </xpath>
     </template>
 
-	<template id="auth_signup_extended" inherit_id="auth_signup.fields" name="Address field for Company / Customer">
-		<xpath expr="//div[@class='mb-3 field-name']" position="after">
+    <template id="auth_signup_extended" inherit_id="auth_signup.fields" name="Address field for Company / Customer">
+        <xpath expr="//div[@class='mb-3 field-name']" position="after">
             <div class="mb-3 field-company_name">
                 <label for="company_name">Company Name</label>
                 <input type="text" id="company_name" name="company_name" placeholder="(Optional)"/>
             </div>
             <div class="mb-3 field-company_address" style="display:none;">
-                <label for="contractor_doc">Company Address</label>
+                <label>Company Address</label>
                 <hr style="margin: 5px 0;"/>
-                <input type="text" id="company_address_str1" name="company_address_st1" placeholder="Address Line 1"/>
-                <input type="text" id="company_address_str2" name="company_address_st1" placeholder="Address Line 2"/>
+                <input type="text" id="company_address_str1" name="company_address_str1" placeholder="Address Line 1"/>
+                <input type="text" id="company_address_str2" name="company_address_str2" placeholder="Address Line 2"/>
                 <input type="text" id="company_address_city" name="company_address_city" placeholder="City"/>
-                <input type="text" id="company_address_state" name="company_address_state" placeholder="State"/>
+                <select id="company_address_state" name="company_address_state">
+                    <option value="">Select State</option>
+                    <!-- Populate states dynamically -->
+                </select>
                 <input type="text" id="company_address_zip" name="company_address_zip" placeholder="Zip/Postal Code"/>
-                <input type="text" id="company_address_cntry" name="company_address_cntry" placeholder="Country"/>
+                <select id="company_address_cntry" name="company_address_cntry">
+                    <option value="">Select Country</option>
+                    <!-- Populate countries dynamically -->
+                </select>
             </div>
             <div class="mb-3 field-customer_address">
-                <label for="customer_address">Address<br/></label>
+                <label>Address<br/></label>
                 <hr style="margin: 5px 0;"/>
-                <input type="text" id="customer_address_str1" name="customer_address_st1" placeholder="Address Line 1"/>
-                <input type="text" id="customer_address_str2" name="customer_address_st1" placeholder="Address Line 2"/>
+                <input type="text" id="customer_address_str1" name="customer_address_str1" placeholder="Address Line 1"/>
+                <input type="text" id="customer_address_str2" name="customer_address_str2" placeholder="Address Line 2"/>
                 <input type="text" id="customer_address_city" name="customer_address_city" placeholder="City"/>
-                <input type="text" id="customer_address_state" name="customer_address_state" placeholder="State"/>
+                <select id="customer_address_state" name="customer_address_state">
+                    <option value="">Select State</option>
+                    <!-- Populate states dynamically -->
+                </select>
                 <input type="text" id="customer_address_zip" name="customer_address_zip" placeholder="Zip/Postal Code"/>
-                <input type="text" id="customer_address_cntry" name="customer_address_cntry" placeholder="Country"/>
+                <select id="customer_address_cntry" name="customer_address_cntry">
+                    <option value="">Select Country</option>
+                    <!-- Populate countries dynamically -->
+                </select>
             </div>
-
-		</xpath>
-		<xpath expr="//div[@class='mb-3 field-confirm_password']" position="after">
-			<div class="mb-3 field-phone">
-				<label for="phone">Phone Number</label>
-				<input type="tel"  name="phone" t-att-value="phone" id="phone" class="form-control form-control-sm" required="required" placeholder="+13038657377" />
-			</div>
-		</xpath>
+        </xpath>
+        <xpath expr="//div[@class='mb-3 field-confirm_password']" position="after">
+            <div class="mb-3 field-phone">
+                <label for="phone">Phone Number</label>
+                <input type="tel" name="phone" t-att-value="phone" id="phone" class="form-control form-control-sm" required="required" placeholder="+13038657377"/>
+            </div>
+        </xpath>
         <xpath expr="//div[last()]" position="after">
             <div class="form-group field-contractor_doc">
                 <label for="contractor_doc">If you are a contractor, please provide proof of contractor license:</label>
                 <input type="file" name="contractor_doc" id="contractor_doc" class="form-control form-control-sm"/>
-                <input type="hidden" name="contractor_doc_filename" t-att-value="'file_' + (name or 'default_name')" />
+                <input type="hidden" name="contractor_doc_filename" t-att-value="'file_' + (name or 'default_name')"/>
             </div>
-            <div style="height:15px">
-            </div>
+            <div style="height:15px"></div>
             <div class="form-group field-fiscal_doc">
                 <label for="fiscal_pos_doc">If you are tax exempt, please proof of fiscal position:</label>
                 <input type="file" name="fiscal_pos_doc" id="fiscal_pos_doc" class="form-control form-control-sm"/>
-                <input type="hidden" name="fiscal_pos_doc_name" t-att-value="'file_' + (name or 'default_name')" />
+                <input type="hidden" name="fiscal_pos_doc_name" t-att-value="'file_' + (name or 'default_name')"/>
             </div>
-            <div style="height:15px">
-            </div>
+            <div style="height:15px"></div>
         </xpath>
     </template>
 </odoo>
