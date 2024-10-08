@@ -33,14 +33,32 @@ class ResPartnerInherit(models.Model):
 
 
     @api.model
-    def create_attachment_record(self, vals):
+    def create_contact_record(self, vals):
         # Create the record
         record = super(ResPartnerInherit, self).create(vals)
+
+        if(vals.get('company_name')):
+            record.street = vals.get('company_address_str1')
+            record.street2 = vals.get('company_address_str2')
+            record.city = vals.get('company_address_city')
+            record.state_id = vals.get('company_address_state')
+            record.zip = vals.get('company_address_zip')
+            record.country_id = vals.get('company_address_cntry')
+        else:
+            record.street = vals.get('customer_address_str1')
+            record.street2 = vals.get('customer_address_str2')
+            record.city = vals.get('customer_address_city')
+            record.state_id = vals.get('customer_address_state')
+            record.zip = vals.get('customer_address_zip')
+            record.country_id = vals.get('customer_address_cntry')
 
         # Create an fiscal_pos_doc if the binary field has data
         if vals.get('fiscal_pos_doc'):
 
-            self.env['ir.attachment'].create_attachment_record({
+            record.x_studio_fiscal_doc = vals.get('fiscal_pos_doc')
+            record.x_studio_fiscal_doc_filename = vals.get('fiscal_pos_doc_name')
+
+            self.env['ir.attachment'].create_contact_record({
                 'name': vals.get('fiscal_pos_doc_name'),
                 'type': 'binary',
                 'datas': vals.get('fiscal_pos_doc'),
@@ -51,7 +69,10 @@ class ResPartnerInherit(models.Model):
         # Create an attachment if the binary field has data
         if vals.get('contractor_doc'):
 
-            self.env['ir.attachment'].create_attachment_record({
+            record.x_studio_contractor_doc = vals.get('contractor_doc')
+            record.x_studio_contractor_doc_filename = vals.get('contractor_doc_filename')
+
+            self.env['ir.attachment'].create_contact_record({
                 'name': vals.get('contractor_doc'),
                 'type': 'binary',
                 'datas': vals.get('contractor_doc'),
