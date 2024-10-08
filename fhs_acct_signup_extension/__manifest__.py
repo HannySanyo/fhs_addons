@@ -14,7 +14,7 @@
   "author": "FHS - G.S.S.",
   "depends": ['auth_signup'],
   "data": [
-      'views/account_details_template.xml',
+      'views/acct_signup_extension_view.xml',
       # 'views/res_partner_view.xml',  # This file is used to create page 'tabs' with the attachments; not needed if not wanted
   ],
   "assets": {
