@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////
-// File Name: __inti__.py
+// File Name: signup.js
 // Revision History:  Engineer    Date          Description
 //                    G. Sanyo    10/08/2024    Add compnay name and address fields
 //                    G. Sanyo    09/29/2024    Creation
