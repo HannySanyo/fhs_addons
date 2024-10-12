@@ -5,7 +5,7 @@
             <field name="name">purchase.order.report.custom</field>
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.report_purchaseorder_document"/>
-            <field name="priority" eval="20"/> <!-- Set priority to ensure correct loading order -->
+            <field name="priority" eval="5"/> <!-- Set lower priority (higher precedence) -->
             <field name="arch" type="xml">
 
                 <!-- Extend the view after the shipping address condition -->
