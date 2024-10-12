@@ -5,30 +5,21 @@
             <field name="name">purchase.order.report.custom</field>
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.report_purchaseorder_document"/>
-            <field name="priority" eval="5"/> <!-- Set lower priority (higher precedence) -->
+            <field name="priority" eval="20"/>
             <field name="arch" type="xml">
-
-                <!-- Extend the view after the shipping address condition -->
                 <xpath expr="//t[@t-if='o.dest_address_id']" position="after">
                     <t t-else="">
                         <t t-set="information_block">
-                            <!-- Check for the specific picking type and warehouse names -->
                             <t t-if="o.picking_type_id.name != 'Receipts' or o.picking_type_id.warehouse_id.name != 'Vendor Pickups'">
                                 <strong>Shipping Address:</strong>
-                                
-                                <!-- Display the warehouse name and contact details -->
                                 <div t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
                                     <span t-field="o.picking_type_id.warehouse_id.name"/>
                                     <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
                                 </div>
                             </t>
-
-                            <!-- Display "N/A - Local Pickup" for specific conditions -->
                             <div t-if="o.picking_type_id.name == 'Receipts' and o.picking_type_id.warehouse_id.name == 'TRUCK-T46'">
                                 <strong>Shipping Address:</strong>
-                                <p t-esc="'N/A - Local Pickup'" style="margin: 0;"/>  <!-- Removed margin -->
-
-                                <!-- Show phone icon without extra spacing -->
+                                <p t-esc="'N/A - Local Pickup'" style="margin: 0;"/>
                                 <t t-if="o.picking_type_id.warehouse_id.partner_id and o.picking_type_id.warehouse_id.partner_id.phone">
                                     <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}" style="margin: 0;"/>
                                 </t>
@@ -36,7 +27,6 @@
                         </t>
                     </t>
                 </xpath>
-
             </field>
         </record>
     </data>
