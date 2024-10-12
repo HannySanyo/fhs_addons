@@ -23,7 +23,7 @@
                             </t>
 
                             <!-- Display "N/A - Local Pickup" for specific conditions -->
-                            <div t-if="o.picking_type_id.name == 'Receipts' and o.picking_type_id.warehouse_id.name == 'Vendor Pickups'">
+                            <div t-if="o.picking_type_id.name == 'Receipts' and o.picking_type_id.warehouse_id.name == 'TRUCK-T46'">
                                 <strong>Shipping Address:</strong>
                                 <p t-esc="'N/A - Local Pickup'" style="margin: 0;"/>  <!-- Removed margin -->
 
