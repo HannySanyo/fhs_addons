@@ -11,42 +11,58 @@ class ResUsers(models.Model):
     
 	address_str1 = fields.Char(string='Street1')
 	address_str2 = fields.Char(string='Street2')
-	address_city = fields.Char(string='City')
-	address_state = fields.Char(string='State')
-	address_cntry = fields.Char(string='Country')
-	address_zip = fields.Char(string='Zip')
+	city = fields.Char(string='City')
+	state_id = fields.Many2one('res.country.state', string='State')
+	country_id = fields.Many2one('res.country', string='Country')
+	zip = fields.Char(string='Zip')
 
 	@api.model
 	def signup(self, values, token=None):
-		""" signup a user, to either:
-			- create a new user (no token), or
-			- create a user for a partner (with token, but no user for partner), or
-			- change the password of a user (with token, and existing user).
-			:param values: a dictionary with field values that are written on user
-			:param token: signup token (optional)
-			:return: (dbname, login, password) for the signed up user
-		"""
-		
+		""" 
+        Signup a user, either:
+        - create a new user (no token), or
+        - create a user for a partner (with token), or
+        - change the password of an existing user (with token).
+        
+        :param values: Dictionary with field values for the user
+        :param token: Signup token (optional)
+        :return: (dbname, login, password) for the signed-up user
+        """
+        
+        # If a token is provided, retrieve the associated partner
 		if token:
 			partner = self.env['res.partner']._signup_retrieve_partner(token, check_validity=True, raise_exception=True)
 			partner_user = partner.user_ids and partner.user_ids[0] or False
+            
 			if partner_user:
-				values['phone'] = values.get('phone')
-				values['address_str1'] = values.get('address_str1')
-				values['address_str2'] = values.get('address_str2')
-				values['address_city'] = values.get('address_city')
-				values['address_state'] = values.get('address_state')
-				values['address_cntry'] = values.get('address_cntry')
-				values['address_zip'] = values.get('address_zip')
+				# Update values with partner's address details
+				self._update_address_fields(values)
 
-		else:	
-			values['phone'] = values.get('phone')
-			values['address_str1'] = values.get('address_str1')
-			values['address_str2'] = values.get('address_str2')
-			values['address_city'] = values.get('address_city')
-			values['address_state'] = values.get('address_state')
-			values['address_cntry'] = values.get('address_cntry')
-			values['address_zip'] = values.get('address_zip')
+			else:
+            	# For new user signup without a token
+				self._update_address_fields(values)
+
+		# Create the user with the updated values
+		user = super(ResUsers, self).create(values)
+
+		# Update the partner's address fields
+		user.partner_id.write({
+            'street': values.get('address_str1'),
+            'street2': values.get('address_str2'),
+            'city': values.get('city'),
+            'state_id': values.get('state_id'),
+            'country_id': values.get('country_id'),
+            'zip': values.get('zip'),
+        })
 
 		return super(ResUsers, self).signup(values, token)
-		
+
+	def _update_address_fields(self, values):
+		""" Helper method to update address fields in values dictionary. """
+		values['phone'] = values.get('phone')
+		values['address_str1'] = values.get('address_str1')
+		values['address_str2'] = values.get('address_str2')
+		values['city'] = values.get('city')
+		values['state_id'] = values.get('state_id')
+		values['country_id'] = values.get('country_id')
+		values['zip'] = values.get('zip')

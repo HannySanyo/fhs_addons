@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Template to allow attachments in the signup form -->
     <template id="auth_signup_attachments" inherit_id="auth_signup.signup" name="Allow for attachments fields">
         <xpath expr="//form" position="attributes">
             <attribute name="enctype">multipart/form-data</attribute>
         </xpath>
     </template>
 
+    <!-- Template to extend signup fields with address information -->
     <template id="auth_signup_extended" inherit_id="auth_signup.fields" name="Address field for Company / Customer">
         <xpath expr="//div[@class='mb-3 field-name']" position="after">
             <div class="mb-3 field-address">
                 <label>Address</label>
                 <hr style="margin: 5px 0;"/>
-                <input type="text" id="address_str1" name="address_str1" placeholder="Address Line 1"/>
+                <input type="text" id="address_str1" name="address_str1" placeholder="Address Line 1" required="required"/>
                 <input type="text" id="address_str2" name="address_str2" placeholder="Address Line 2"/>
-                <input type="text" id="address_city" name="address_city" placeholder="City"/>
-                <input type="text" id="address_zip" name="address_zip" placeholder="Zip/Postal Code"/>
-                <select id="address_cntry" name="address_cntry">
+                <input type="text" id="city" name="city" placeholder="City" required="required"/>
+                <input type="text" id="zip" name="zip" placeholder="Zip/Postal Code" required="required"/>
+                <select id="country" name="country" required="required">
                     <option value="">Select Country</option>
                 </select>
-                <label for="address_state">State</label>
-                <select id="address_state" name="address_state">
+                <label for="state">State</label>
+                <select id="state" name="state" required="required">
                     <option value="">Select State</option>
                 </select>
             </div>
         </xpath>
+
         <xpath expr="//div[@class='mb-3 field-confirm_password']" position="after">
             <div class="mb-3 field-phone">
                 <label for="phone">Phone Number</label>
                 <input type="tel" name="phone" t-att-value="phone" id="phone" class="form-control form-control-sm" required="required" placeholder="+13038657377"/>
             </div>
         </xpath>
+
         <xpath expr="//div[last()]" position="after">
             <div class="form-group field-contractor_doc">
                 <label for="contractor_doc">If you are a contractor, please provide proof of contractor license:</label>
@@ -38,7 +42,7 @@
             </div>
             <div style="height:15px"></div>
             <div class="form-group field-fiscal_doc">
-                <label for="fiscal_pos_doc">If you are tax exempt, please proof of fiscal position:</label>
+                <label for="fiscal_pos_doc">If you are tax exempt, please provide proof of fiscal position:</label>
                 <input type="file" name="fiscal_pos_doc" id="fiscal_pos_doc" class="form-control form-control-sm"/>
                 <input type="hidden" name="fiscal_pos_doc_name" t-att-value="'file_' + (name or 'default_name')"/>
             </div>

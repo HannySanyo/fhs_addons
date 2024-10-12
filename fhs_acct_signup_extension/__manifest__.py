@@ -6,27 +6,26 @@
 #################################################################################
 
 {
-  "name": "Account Sign-Up Extended",
-  "summary": """Add additional fields during account sign-up, such as phone, company name, addresses, attachments, etc.""",
-  "category": "Website",
-  "version": "1.0.0",
-  "sequence": 1,
-  "author": "FHS - G.S.S.",
-  "depends": ['auth_signup'],
-  "data": [
-      'data/res.country.state.csv',
-      'views/acct_signup_extension_view.xml',
-      # 'views/res_partner_view.xml',  # This file is used to create page 'tabs' with the attachments; not needed if not wanted
-  ],
-  "assets": {
-      'web.assets_frontend': [
-          'static/src/js/dynamic_fields.js',
-          'static/src/js/signup.js',
-      ],
-  },
-  "images": ['static/description/fhs.png'],
-  "application": True,
-  "installable": True,
-  "auto_install": False,
-  "pre_init_hook": "pre_init_check",
+    "name": "Account Sign-Up Extended",
+    "summary": """Add additional fields during account sign-up, such as phone, address, attachments, etc.""",
+    "category": "Website",
+    "version": "1.0.0",
+    "sequence": 1,
+    "author": "FHS - G.S.S.",
+    "depends": ['auth_signup'],
+    "data": [
+        'data/res.country.state.csv',
+        'views/acct_signup_extension_view.xml',
+        # 'views/res_partner_view.xml',  # Uncomment if needed
+    ],
+    "assets": {
+        'web.assets_frontend': [
+            'static/src/js/dynamic_fields.js',
+            'static/src/js/signup.js',
+        ],
+    },
+    "images": ['static/description/fhs.png'],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
 }
