@@ -1,22 +1,21 @@
+#################################################################################
+# File Name: res_partner.py
+# Revision History:  Engineer    Date          Description
+#                    G. Sanyo    10/08/2024    Add address fields
+#                    G. Sanyo    09/29/2024    Creation
+#################################################################################
+
 from odoo import models, fields, api
 
 class ResPartnerInherit(models.Model):
     _inherit = 'res.partner'
 
-    company_name = fields.Char(string='Company Name')
-    company_address_str1 = fields.Char(string='Company Address Street1')
-    company_address_str2 = fields.Char(string='Company Address Street2')
-    company_address_city = fields.Char(string='Company Address City')
-    company_address_state = fields.Many2one('res.country.state', string='Company Address State')
-    company_address_cntry = fields.Many2one('res.country', string='Company Address Country')
-    company_address_zip = fields.Char(string='Company Zip')
-
-    customer_address_str1 = fields.Char(string='Customer Street1')
-    customer_address_str2 = fields.Char(string='Customer Street2')
-    customer_address_city = fields.Char(string='Customer City')
-    customer_address_state = fields.Many2one('res.country.state', string='Customer Address State')
-    customer_address_cntry = fields.Many2one('res.country', string='Customer Address Country')
-    customer_address_zip = fields.Char(string='Customer Zip')
+    address_str1 = fields.Char(string='Street1')
+    address_str2 = fields.Char(string='Street2')
+    address_city = fields.Char(string='City')
+    address_state = fields.Many2one('res.country.state', string='Address State')
+    address_cntry = fields.Many2one('res.country', string='Address Country')
+    address_zip = fields.Char(string='Zip')
 
     contractor_doc = fields.Binary(string='Contractor Doc', attachment=True)
     contractor_doc_filename = fields.Char(string='Contractor Doc Name')
@@ -28,21 +27,14 @@ class ResPartnerInherit(models.Model):
         # Create the record
         record = super(ResPartnerInherit, self).create(vals)
 
-        # Set address fields based on whether it's a company or customer
-        if vals.get('company_name'):
-            record.street = vals.get('company_address_str1')
-            record.street2 = vals.get('company_address_str2')
-            record.city = vals.get('company_address_city')
-            record.state_id = vals.get('company_address_state')
-            record.zip = vals.get('company_address_zip')
-            record.country_id = vals.get('company_address_cntry')
-        else:
-            record.street = vals.get('customer_address_str1')
-            record.street2 = vals.get('customer_address_str2')
-            record.city = vals.get('customer_address_city')
-            record.state_id = vals.get('customer_address_state')
-            record.zip = vals.get('customer_address_zip')
-            record.country_id = vals.get('customer_address_cntry')
+        # Set address fields
+        if vals.get('address_str1'):
+            record.street = vals.get('address_str1')
+            record.street2 = vals.get('address_str2')
+            record.city = vals.get('address_city')
+            record.state_id = vals.get('address_state')
+            record.zip = vals.get('address_zip')
+            record.country_id = vals.get('address_cntry')
 
         # Create attachments if the binary fields have data
         if vals.get('fiscal_pos_doc'):

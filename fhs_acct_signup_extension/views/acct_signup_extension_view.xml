@@ -8,38 +8,18 @@
 
     <template id="auth_signup_extended" inherit_id="auth_signup.fields" name="Address field for Company / Customer">
         <xpath expr="//div[@class='mb-3 field-name']" position="after">
-            <div class="mb-3 field-company_name">
-                <label for="company_name">Company Name</label>
-                <input type="text" id="company_name" name="company_name" placeholder="(Optional)"/>
-            </div>
-            <div class="mb-3 field-company_address" style="display:none;">
-                <label>Company Address</label>
+            <div class="mb-3 field-address">
+                <label>Address</label>
                 <hr style="margin: 5px 0;"/>
-                <input type="text" id="company_address_str1" name="company_address_str1" placeholder="Address Line 1"/>
-                <input type="text" id="company_address_str2" name="company_address_str2" placeholder="Address Line 2"/>
-                <input type="text" id="company_address_city" name="company_address_city" placeholder="City"/>
-                <label for="company_address_cntry">Country</label>
-                <select id="company_address_cntry" name="company_address_cntry">
+                <input type="text" id="address_str1" name="address_str1" placeholder="Address Line 1"/>
+                <input type="text" id="address_str2" name="address_str2" placeholder="Address Line 2"/>
+                <input type="text" id="address_city" name="address_city" placeholder="City"/>
+                <input type="text" id="address_zip" name="address_zip" placeholder="Zip/Postal Code"/>
+                <select id="address_cntry" name="address_cntry">
                     <option value="">Select Country</option>
                 </select>
-                <label for="company_address_state">State</label>
-                <select id="company_address_state" name="company_address_state">
-                    <option value="">Select State</option>
-                </select>
-                <input type="text" id="company_address_zip" name="company_address_zip" placeholder="Zip/Postal Code"/>
-            </div>
-            <div class="mb-3 field-customer_address">
-                <label>Address<br/></label>
-                <hr style="margin: 5px 0;"/>
-                <input type="text" id="customer_address_str1" name="customer_address_str1" placeholder="Address Line 1"/>
-                <input type="text" id="customer_address_str2" name="customer_address_str2" placeholder="Address Line 2"/>
-                <input type="text" id="customer_address_city" name="customer_address_city" placeholder="City"/>
-                <input type="text" id="customer_address_zip" name="customer_address_zip" placeholder="Zip/Postal Code"/>
-                <select id="customer_address_cntry" name="customer_address_cntry">
-                    <option value="">Select Country</option>
-                </select>
-                <label for="customer_address_state">State</label>
-                <select id="customer_address_state" name="customer_address_state">
+                <label for="address_state">State</label>
+                <select id="address_state" name="address_state">
                     <option value="">Select State</option>
                 </select>
             </div>

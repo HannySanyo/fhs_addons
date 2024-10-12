@@ -7,7 +7,7 @@ odoo.define('auth_signup_extended.dynamic_fields', function (require) {
     publicWidget.registry.SignupForm = publicWidget.Widget.extend({
         selector: '#signup_form',
         events: {
-            'change #company_address_cntry': '_onCountryChange',
+            'change #address_cntry': '_onCountryChange',
         },
 
         _onCountryChange: function (event) {
@@ -19,7 +19,7 @@ odoo.define('auth_signup_extended.dynamic_fields', function (require) {
                     route: '/get_states',
                     params: { country_id: countryId },
                 }).then(function (states) {
-                    var $stateSelect = $('#company_address_state');
+                    var $stateSelect = $('#address_state');
                     $stateSelect.empty().append('<option value="">Select State</option>');
                     states.forEach(function (state) {
                         $stateSelect.append('<option value="' + state.id + '">' + state.name + '</option>');
@@ -33,7 +33,7 @@ odoo.define('auth_signup_extended.dynamic_fields', function (require) {
                 route: '/get_countries',
                 params: {},
             }).then(function (countries) {
-                var $countrySelect = $('#company_address_cntry');
+                var $countrySelect = $('#address_cntry');
                 countries.forEach(function (country) {
                     $countrySelect.append('<option value="' + country.id + '">' + country.name + '</option>');
                 });

@@ -1,29 +1,20 @@
 #################################################################################
 # File Name: res_user.py
 # Revision History:  Engineer    Date          Description
-#                    G. Sanyo    10/08/2024    Add compnay name and address fields
+#                    G. Sanyo    10/08/2024    Add address fields
 #                    G. Sanyo    09/29/2024    Creation
 #################################################################################
 from odoo import api, fields, models
 
 class ResUsers(models.Model):
 	_inherit = 'res.users'
-
-	company_name = fields.Char(string='Company Name')
-
-	company_address_str1 = fields.Char(string='Company Address Street1')
-	company_address_str2 = fields.Char(string='Company Address Street2')
-	company_address_city = fields.Char(string='Company Address City')
-	company_address_state = fields.Char(string='Company Address State')
-	company_address_cntry = fields.Char(string='Company Address Country')
-	company_address_zip = fields.Char(string='Company Zip')
     
-	customer_address_str1 = fields.Char(string='Customer Street1')
-	customer_address_str2 = fields.Char(string='Customer Street2')
-	customer_address_city = fields.Char(string='Customer City')
-	customer_address_state = fields.Char(string='Customer State')
-	customer_address_cntry = fields.Char(string='Customer Country')
-	customer_address_zip = fields.Char(string='Customer Zip')
+	address_str1 = fields.Char(string='Street1')
+	address_str2 = fields.Char(string='Street2')
+	address_city = fields.Char(string='City')
+	address_state = fields.Char(string='State')
+	address_cntry = fields.Char(string='Country')
+	address_zip = fields.Char(string='Zip')
 
 	@api.model
 	def signup(self, values, token=None):
@@ -41,35 +32,21 @@ class ResUsers(models.Model):
 			partner_user = partner.user_ids and partner.user_ids[0] or False
 			if partner_user:
 				values['phone'] = values.get('phone')
-				values['company_name'] = values.get('company_name')
-				values['company_address_str1'] = values.get('company_address_str1')
-				values['company_address_str2'] = values.get('company_address_str2')
-				values['company_address_city'] = values.get('company_address_city')
-				values['company_address_state'] = values.get('company_address_state')
-				values['company_address_cntry'] = values.get('company_address_cntry')
-				values['company_address_zip'] = values.get('company_address_zip')
-				values['customer_address_str1'] = values.get('customer_address_str1')
-				values['customer_address_str2'] = values.get('customer_address_str2')
-				values['customer_address_city'] = values.get('customer_address_city')
-				values['customer_address_state'] = values.get('customer_address_state')
-				values['customer_address_cntry'] = values.get('customer_address_cntry')
-				values['customer_address_zip'] = values.get('customer_address_zip')
+				values['address_str1'] = values.get('address_str1')
+				values['address_str2'] = values.get('address_str2')
+				values['address_city'] = values.get('address_city')
+				values['address_state'] = values.get('address_state')
+				values['address_cntry'] = values.get('address_cntry')
+				values['address_zip'] = values.get('address_zip')
 
 		else:	
 			values['phone'] = values.get('phone')
-			values['company_name'] = values.get('company_name')
-			values['company_address_str1'] = values.get('company_address_str1')
-			values['company_address_str2'] = values.get('company_address_str2')
-			values['company_address_city'] = values.get('company_address_city')
-			values['company_address_state'] = values.get('company_address_state')
-			values['company_address_cntry'] = values.get('company_address_cntry')
-			values['company_address_zip'] = values.get('company_address_zip')
-			values['customer_address_str1'] = values.get('customer_address_str1')
-			values['customer_address_str2'] = values.get('customer_address_str2')
-			values['customer_address_city'] = values.get('customer_address_city')
-			values['customer_address_state'] = values.get('customer_address_state')
-			values['customer_address_cntry'] = values.get('customer_address_cntry')
-			values['customer_address_zip'] = values.get('customer_address_zip')
+			values['address_str1'] = values.get('address_str1')
+			values['address_str2'] = values.get('address_str2')
+			values['address_city'] = values.get('address_city')
+			values['address_state'] = values.get('address_state')
+			values['address_cntry'] = values.get('address_cntry')
+			values['address_zip'] = values.get('address_zip')
 
 		return super(ResUsers, self).signup(values, token)
 		
