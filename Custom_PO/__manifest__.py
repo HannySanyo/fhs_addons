@@ -7,9 +7,9 @@
         This module customizes the purchase order report to include custom shipping address information.
     """,
     'author': 'Your Name',
-    'depends': ['purchase'],
+    'depends': ['purchase', 'purchase_stock'], 
     'data': [
-        'views/purchase_order_view.xml',
+        'views/purchase_order_view.xml', 
     ],
     'installable': True,
     'application': False,
