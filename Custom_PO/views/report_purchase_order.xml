@@ -1,16 +1,14 @@
 <odoo>
     <data>
-        <!-- Inherit the purchase order report view -->
-        <record id="view_custom_purchase_order_report" model="ir.ui.view">
-            <field name="name">purchase.order.report.custom</field>
+        <record id="custom_report_purchaseorder_document" model="ir.ui.view">
+            <field name="name">Custom Purchase Order Report</field>
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.report_purchaseorder_document"/>
-            <field name="priority" eval="20"/>
             <field name="arch" type="xml">
                 <xpath expr="//t[@t-if='o.dest_address_id']" position="after">
                     <t t-else="">
                         <t t-set="information_block">
-                            <t t-if="o.picking_type_id.name != 'Receipts' or o.picking_type_id.warehouse_id.name != 'Vendor Pickups'">
+                            <t t-if="o.picking_type_id.name == 'Receipts' and o.picking_type_id.warehouse_id.name != 'TRUCK-T46'">
                                 <strong>Shipping Address:</strong>
                                 <div t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
                                     <span t-field="o.picking_type_id.warehouse_id.name"/>
