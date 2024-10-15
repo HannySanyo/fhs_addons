@@ -12,7 +12,7 @@
     "version": "1.0.0",
     "sequence": 1,
     "author": "FHS - G.S.S.",
-    "depends": ['auth_signup', 'base'],
+    "depends": ['auth_signup'],
     "data": [
         'views/acct_signup_extension_view.xml',
         # 'views/res_partner_view.xml',  # Uncomment if needed
@@ -20,7 +20,6 @@
     "assets": {
         'web.assets_frontend': [
             'static/src/js/dynamic_fields.js',
-            'static/src/js/signup.js',
         ],
     },
     "images": ['static/description/fhs.png'],
