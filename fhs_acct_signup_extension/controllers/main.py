@@ -42,8 +42,8 @@ class AuthSignupHomeInherit(AuthSignupHome):
         
         if values.get('address_str1'):
             values.update({
-                'address_str1': values.get('address_str1'),
-                'address_str2': values.get('address_str2'),
+                #'address_str1': values.get('address_str1'),
+                #'address_str2': values.get('address_str2'),
                 'city': values.get('city'),
                 'state_id': values.get('state_id'),
                 'zip': values.get('zip'),
@@ -79,6 +79,14 @@ class AuthSignupHomeInherit(AuthSignupHome):
         request.env.cr.commit()
 
     def get_auth_signup_qcontext(self):
+        qcontext = super(AuthSignupHome, self).get_auth_signup_qcontext()
+        cr, uid, context, registry = request.cr, request.uid, request.context, request.registry
+        state_orm = registry.get('res.country.state')
+        states_ids = state_orm.search(cr, SUPERUSER_ID, [], context=context)
+        states = state_orm.browse(cr, SUPERUSER_ID, states_ids, context)
+        qcontext['states'] = states
+        request qcontext
+
         SIGN_UP_REQUEST_PARAMS.update({
             'phone',
             'address_str1',
