@@ -12,7 +12,7 @@
     "version": "1.0.0",
     "sequence": 1,
     "author": "FHS - G.S.S.",
-    "depends": ['auth_signup'],
+    "depends": ['auth_signup', 'base'],
     "data": [
         'data/res.country.state.csv',
         'views/acct_signup_extension_view.xml',
