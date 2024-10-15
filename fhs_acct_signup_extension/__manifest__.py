@@ -14,7 +14,6 @@
     "author": "FHS - G.S.S.",
     "depends": ['auth_signup', 'base'],
     "data": [
-        'data/res.country.state.csv',
         'views/acct_signup_extension_view.xml',
         # 'views/res_partner_view.xml',  # Uncomment if needed
     ],
