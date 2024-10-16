@@ -78,24 +78,25 @@ class AuthSignupHomeInherit(AuthSignupHome):
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
 
-    def get_auth_signup_qcontext(self):
-        qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
-        cr, uid, context, registry = request.cr, request.uid, request.env.context, request.registry
-        state_orm = registry.get('res.country.state')
-        states_ids = state_orm.search(cr, SUPERUSER_ID, [], context=context)
-        states = state_orm.browse(cr, SUPERUSER_ID, states_ids, context=context)
-        qcontext['states'] = states
+def get_auth_signup_qcontext(self):
+    qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
+    state_orm = request.env['res.country.state']
+    
+    # Get the state records without passing the context
+    states = state_orm.search([])  # This automatically uses the request context
 
-        SIGN_UP_REQUEST_PARAMS.update({
-            'phone',
-            'address_str1',
-            'address_str2',
-            'city',
-            'state_id',
-            'zip',
-            'fiscal_pos_doc',
-            'fiscal_pos_doc_name',
-            'contractor_doc',
-            'contractor_doc_filename'
-        })
-        return qcontext
+    qcontext['states'] = states
+
+    SIGN_UP_REQUEST_PARAMS.update({
+        'phone',
+        'address_str1',
+        'address_str2',
+        'city',
+        'state_id',
+        'zip',
+        'fiscal_pos_doc',
+        'fiscal_pos_doc_name',
+        'contractor_doc',
+        'contractor_doc_filename'
+    })
+    return qcontext
