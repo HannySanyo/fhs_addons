@@ -9,11 +9,12 @@
 import base64
 from odoo import _
 from odoo import http
-from odoo.http import request,route
+from odoo.http import request, route
 from odoo.exceptions import UserError
 from odoo.addons.web.controllers.home import SIGN_UP_REQUEST_PARAMS
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
-    
+from odoo import SUPERUSER_ID  # Import SUPERUSER_ID
+
 class AuthSignupHomeInherit(AuthSignupHome):
 
     def do_signup(self, qcontext):
@@ -32,7 +33,7 @@ class AuthSignupHomeInherit(AuthSignupHome):
             'fiscal_pos_doc_name',
             'contractor_doc',
             'contractor_doc_filename'
-        ) }
+        )}
 
         if not values:
             raise UserError(_("The form was not properly filled in."))
@@ -42,8 +43,6 @@ class AuthSignupHomeInherit(AuthSignupHome):
         
         if values.get('address_str1'):
             values.update({
-                #'address_str1': values.get('address_str1'),
-                #'address_str2': values.get('address_str2'),
                 'city': values.get('city'),
                 'state_id': values.get('state_id'),
                 'zip': values.get('zip'),
@@ -72,20 +71,20 @@ class AuthSignupHomeInherit(AuthSignupHome):
             })
 
         supported_lang_codes = [code for code, _ in request.env['res.lang'].get_installed()]
-        lang = request.context.get('lang', '').split('_')[0]
+        lang = request.env.context.get('lang', '').split('_')[0]
         if lang in supported_lang_codes:
             values['lang'] = lang
+            
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
 
     def get_auth_signup_qcontext(self):
-        qcontext = super(AuthSignupHome, self).get_auth_signup_qcontext()
-        cr, uid, context, registry = request.cr, request.uid, request.context, request.registry
+        qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
+        cr, uid, context, registry = request.cr, request.uid, request.env.context, request.registry
         state_orm = registry.get('res.country.state')
         states_ids = state_orm.search(cr, SUPERUSER_ID, [], context=context)
-        states = state_orm.browse(cr, SUPERUSER_ID, states_ids, context)
+        states = state_orm.browse(cr, SUPERUSER_ID, states_ids, context=context)
         qcontext['states'] = states
-        request qcontext
 
         SIGN_UP_REQUEST_PARAMS.update({
             'phone',
@@ -99,4 +98,4 @@ class AuthSignupHomeInherit(AuthSignupHome):
             'contractor_doc',
             'contractor_doc_filename'
         })
-        return super().get_auth_signup_qcontext()
+        return qcontext
