@@ -77,13 +77,7 @@ class AuthSignupHomeInherit(AuthSignupHome):
 def get_auth_signup_qcontext(self):
     qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
 
-    cr, context, registry = request.cr, request.context, request.registry
-
-    state_orm = registry.get('res.country.state')
-    states_ids = state_orm.search(cr, SUPERUSER_ID, [], context)
-    states = state_orm.browse(cr, SUPERUSER_ID, states_ids, context)
-
-    qcontext['states'] = states
+    qcontext['states'] = request.env["res.country.state"].sudo().search([])
 
     SIGN_UP_REQUEST_PARAMS.update({
         'phone',
