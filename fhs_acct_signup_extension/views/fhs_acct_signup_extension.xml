@@ -14,11 +14,11 @@
                 <input type="text" id="address_str1" name="address_str1" placeholder="Address Line 1" required="required"/>
                 <input type="text" id="address_str2" name="address_str2" placeholder="Address Line 2"/>
                 <input type="text" id="city" name="city" placeholder="City" required="required"/>
-                <label class="control-label" for="state_id" style="font-weight: normal">State / Province</label>
+                <label class="control-label" for="state_id" style="font-weight: normal"></label>
                     <select name="state_id" class="form-control">
-                        <option value="">select...</option>
+                        <option value="">State</option>
                         <t t-foreach="states or []" t-as="state">
-                            <option t-att-value="state.id" style="display:none;"><t t-esc="state.name"/></option>
+                            <option t-att-value="state.id"><t t-esc="state.name"/></option>
                         </t>
                     </select>
                 <input type="text" id="zip" name="zip" placeholder="Zip/Postal Code" required="required"/>
