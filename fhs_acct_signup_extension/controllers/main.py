@@ -74,21 +74,22 @@ class AuthSignupHomeInherit(AuthSignupHome):
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
 
-def get_auth_signup_qcontext(self):
-    qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
+    def get_auth_signup_qcontext(self):
+        qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
 
-    qcontext['states'] = request.env["res.country.state"].sudo().search([])
+        qcontext['states'] = request.env["res.country.state"].sudo().search([])
 
-    SIGN_UP_REQUEST_PARAMS.update({
-        'phone',
-        'address_str1',
-        'address_str2',
-        'city',
-        'state_id',
-        'zip',
-        'fiscal_pos_doc',
-        'fiscal_pos_doc_name',
-        'contractor_doc',
-        'contractor_doc_filename'
-    })
-    return qcontext
+        SIGN_UP_REQUEST_PARAMS.update({
+            'phone',
+            'address_str1',
+            'address_str2',
+            'city',
+            'state_id',
+            'zip',
+            'fiscal_pos_doc',
+            'fiscal_pos_doc_name',
+            'contractor_doc',
+            'contractor_doc_filename'
+        })
+        
+        return qcontext
