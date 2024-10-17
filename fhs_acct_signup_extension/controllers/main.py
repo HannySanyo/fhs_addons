@@ -54,8 +54,6 @@ class AuthSignupHomeInherit(AuthSignupHome):
             datas = base64.b64encode(values.get('fiscal_pos_doc').read())
             filename = values.get('fiscal_pos_doc').filename
             values.update({
-                #'fiscal_pos_doc': datas,
-                #'fiscal_pos_doc_name': filename,
                 'x_studio_fiscal_doc': datas,
                 'x_studio_fiscal_doc_filename': filename
             })
@@ -64,8 +62,6 @@ class AuthSignupHomeInherit(AuthSignupHome):
             datas = base64.b64encode(values.get('contractor_doc').read())
             filename = values.get('contractor_doc').filename
             values.update({
-                #'contractor_doc': datas,
-                #'contractor_doc_filename': filename,
                 'x_studio_contractor_doc': datas,
                 'x_studio_contractor_doc_filename': filename
             })
