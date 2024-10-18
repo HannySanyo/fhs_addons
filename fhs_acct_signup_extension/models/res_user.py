@@ -9,8 +9,8 @@ from odoo import api, fields, models
 class ResUsers(models.Model):
 	_inherit = 'res.users'
 
-	address_str1 = fields.Char(string='Street1')
-	address_str2 = fields.Char(string='Street2')
+	address_str1 = fields.Char(string='Address Street1 (ResUser)')
+	address_str2 = fields.Char(string='Address Street2 (ResUser)')
 	city = fields.Char(string='City')
 	state_id = fields.Many2one('res.country.state', string='State')
 	zip = fields.Char(string='Zip')

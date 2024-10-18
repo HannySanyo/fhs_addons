@@ -11,13 +11,13 @@ from odoo import models, fields, api
 class ResPartnerInherit(models.Model):
     _inherit = 'res.partner'
 
-    address_str1 = fields.Char(string='Street1')
-    address_str2 = fields.Char(string='Street2')
+    address_str1 = fields.Char(string='Address Street1 (ResPartner)')
+    address_str2 = fields.Char(string='Address Street2 (ResPartner)')
     city = fields.Char(string='City')
     state_id = fields.Many2one('res.country.state', string='State')
     zip = fields.Char(string='Zip')
 
-    contractor_doc = fields.Binary(string='Contractor Doc', attachment=True)
+    contractor_doc = fields.Binary(string='Contractor Document', attachment=True)
     contractor_doc_filename = fields.Char(string='Contractor Doc Name')
     fiscal_pos_doc = fields.Binary(string='Fiscal Position Doc', attachment=True)
     fiscal_pos_doc_name = fields.Char(string='Fiscal Position Doc Name')
