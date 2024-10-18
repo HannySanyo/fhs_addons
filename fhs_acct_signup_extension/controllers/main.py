@@ -9,7 +9,7 @@
 import base64
 from odoo import _
 from odoo import http
-from odoo.http import request, route
+from odoo.http import request,route
 from odoo.exceptions import UserError
 from odoo.addons.web.controllers.home import SIGN_UP_REQUEST_PARAMS
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
@@ -66,7 +66,7 @@ class AuthSignupHomeInherit(AuthSignupHome):
             })
 
         supported_lang_codes = [code for code, _ in request.env['res.lang'].get_installed()]
-        lang = request.env.context.get('lang', '').split('_')[0]
+        lang = request.context.get('lang', '').split('_')[0]
         if lang in supported_lang_codes:
             values['lang'] = lang
             
@@ -79,7 +79,6 @@ class AuthSignupHomeInherit(AuthSignupHome):
         # Hard-coded United States for country for now
         unitedstates = request.env['res.country'].sudo().search([('code', '=', 'US')], limit=1)
 
-        # Check if country is found and use its ID
         if unitedstates:
             country_id = unitedstates.id
             qcontext['states'] = request.env['res.country.state'].sudo().search([('country_id', '=', country_id)])
@@ -100,4 +99,5 @@ class AuthSignupHomeInherit(AuthSignupHome):
             'contractor_doc_filename'
         })
 
-        return super().get_auth_signup_qcontext()
+        return qcontext
+        #return super().get_auth_signup_qcontext()
