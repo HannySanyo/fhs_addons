@@ -99,4 +99,4 @@ class AuthSignupHomeInherit(AuthSignupHome):
         #     'contractor_doc_filename'
         # })
 
-        return super().get_auth_signup_qcontext(qcontext)
+        return qcontext
