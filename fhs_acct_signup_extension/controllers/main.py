@@ -78,9 +78,15 @@ class AuthSignupHomeInherit(AuthSignupHome):
         qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
 
         # Hard-coded United States for country for now
-        country_id = request.env['res.country'].sudo().search([('code', '=', 'US')], limit=1)
+        unitedstates = request.env['res.country'].sudo().search([('code', '=', 'US')], limit=1)
 
-        qcontext['states'] = request.env['res.country.state'].sudo().search([('country_id', '=', country_id)])
+        # Check if country is found and use its ID
+        if unitedstates:
+            country_id = unitedstates.id
+            qcontext['states'] = request.env['res.country.state'].sudo().search([('country_id', '=', country_id)])
+        else:
+            qcontext['states'] = request.env['res.country.state'].sudo().browse([])  # No states if country not found
+
 
         SIGN_UP_REQUEST_PARAMS.update({
             'phone',
