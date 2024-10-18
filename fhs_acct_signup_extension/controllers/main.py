@@ -77,7 +77,10 @@ class AuthSignupHomeInherit(AuthSignupHome):
     def get_auth_signup_qcontext(self):
         qcontext = super(AuthSignupHomeInherit, self).get_auth_signup_qcontext()
 
-        qcontext['states'] = request.env["res.country.state"].sudo().search([])
+        # Hard-coded United States for country for now
+        country_id = request.env['res.country'].sudo().search([('code', '=', 'US')], limit=1)
+
+        qcontext['states'] = request.env['res.country.state'].sudo().search([('country_id', '=', country_id)])
 
         SIGN_UP_REQUEST_PARAMS.update({
             'phone',
@@ -91,5 +94,5 @@ class AuthSignupHomeInherit(AuthSignupHome):
             'contractor_doc',
             'contractor_doc_filename'
         })
-        
+
         return qcontext
