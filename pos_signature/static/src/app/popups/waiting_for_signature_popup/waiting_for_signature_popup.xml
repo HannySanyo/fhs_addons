@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_signature.WaitingForSignature">
+        <div class="popup popup-confirm">
+            <div class="modal-header">
+                <h4 class="modal-title title drag-handle">
+                    <t t-if="state.is_signed">
+                        Customer Signature
+                    </t>
+                    <t t-else="">
+                        Waiting For Customer Signature ...
+                    </t>
+                </h4>
+            </div>
+            <main class="modal-body bg-secondary" style="height: 200px; padding:0;">
+                <div t-if="!state.is_signed" class="wrap-wk">
+                    <div class="spinner-wrap-wk">
+                        <div class="spinner-wk">
+                            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+                </div>
+                <div t-else="" class="signature-box">
+                </div>
+            </main>   
+            <footer class="footer modal-footer">
+                <div t-if="state.is_signed" class="button cancel btn btn-lg btn-secondary" t-on-click="retake">
+                    Re-take
+                </div>
+
+                <div t-if="state.is_signed" class="button cancel btn btn-lg btn-secondary" t-on-click="delete_sign">
+                    Delete
+                </div>
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                    Cancel
+                </div>                
+            </footer> 
+        </div>
+    </t>
+</templates>
