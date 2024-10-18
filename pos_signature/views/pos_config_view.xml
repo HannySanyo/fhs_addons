@@ -25,7 +25,7 @@
                                 <label class="fw-normal" for="is_signature_mandatory" string="Set Signature Mandatory"/>
                             </div>
                             
-                            <div class="content-group mt16 row" invisible="not (is_pos_signature and pos_iface_customer_facing_display_local)">
+                            <div class="content-group mt16 row" invisible="not (is_pos_signature and pos_customer_display_type)"/>
                                 <label class="fw-bold" for="pos_add_signature_from" string="Add signature from"/>
                                 <div class="text-muted mb-2">
                                     Where would you like to open the signature screen?
