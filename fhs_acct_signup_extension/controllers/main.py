@@ -1,11 +1,3 @@
-#################################################################################
-# File Name: main.py
-# Revision History:  Engineer    Date          Description
-#                    G. Sanyo    10/14/2024    Add address fields
-#                    G. Sanyo    10/03/2024    Add attachments for contractor doc
-#                                              and fiscal position doc
-#                    G. Sanyo    09/29/2024    Creation
-#################################################################################
 import base64
 from odoo import _
 from odoo import http
@@ -13,12 +5,10 @@ from odoo.http import request, route
 from odoo.exceptions import UserError
 from odoo.addons.web.controllers.home import SIGN_UP_REQUEST_PARAMS
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
-from odoo import SUPERUSER_ID
 
 class AuthSignupHomeInherit(AuthSignupHome):
 
     def do_signup(self, qcontext):
-
         values = {key: qcontext.get(key) for key in (
             'login',
             'name',
@@ -37,10 +27,11 @@ class AuthSignupHomeInherit(AuthSignupHome):
 
         if not values:
             raise UserError(_("The form was not properly filled in."))
-        
+
         if values.get('password') != qcontext.get('confirm_password'):
             raise UserError(_("Passwords do not match; please retype them."))
-        
+
+        # Update address fields
         if values.get('address_str1'):
             values.update({
                 'street': values.get('address_str1'),
@@ -50,27 +41,37 @@ class AuthSignupHomeInherit(AuthSignupHome):
                 'zip': values.get('zip'),
             })
 
-        if values.get('fiscal_pos_doc_name'):
-            datas = base64.b64encode(values.get('fiscal_pos_doc').read())
-            filename = values.get('fiscal_pos_doc').filename
-            values.update({
-                'x_studio_fiscal_doc': datas,
-                'x_studio_fiscal_doc_filename': filename
-            })
+        # Handle fiscal document upload
+        if values.get('fiscal_pos_doc'):
+            if hasattr(values['fiscal_pos_doc'], 'read'):
+                datas = base64.b64encode(values['fiscal_pos_doc'].read()).decode('utf-8')
+                filename = values['fiscal_pos_doc'].filename
+                values.update({
+                    'x_studio_fiscal_doc': datas,
+                    'x_studio_fiscal_doc_filename': filename
+                })
+            else:
+                raise UserError(_("Invalid fiscal position document uploaded."))
 
+        # Handle contractor document upload
         if values.get('contractor_doc'):
-            datas = base64.b64encode(values.get('contractor_doc').read())
-            filename = values.get('contractor_doc').filename
-            values.update({
-                'x_studio_contractor_doc': datas,
-                'x_studio_contractor_doc_filename': filename
-            })
+            if hasattr(values['contractor_doc'], 'read'):
+                datas = base64.b64encode(values['contractor_doc'].read()).decode('utf-8')
+                filename = values['contractor_doc'].filename
+                values.update({
+                    'x_studio_contractor_doc': datas,
+                    'x_studio_contractor_doc_filename': filename
+                })
+            else:
+                raise UserError(_("Invalid contractor document uploaded."))
 
+        # Set language
         supported_lang_codes = [code for code, _ in request.env['res.lang'].get_installed()]
         lang = request.env.context.get('lang', '').split('_')[0]
         if lang in supported_lang_codes:
             values['lang'] = lang
-            
+
+        # Perform signup
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
 
@@ -86,7 +87,6 @@ class AuthSignupHomeInherit(AuthSignupHome):
             qcontext['states'] = request.env['res.country.state'].sudo().search([('country_id', '=', country_id)])
         else:
             qcontext['states'] = request.env['res.country.state'].sudo().browse([])  # No states if country not found
-
 
         SIGN_UP_REQUEST_PARAMS.update({
             'phone',
